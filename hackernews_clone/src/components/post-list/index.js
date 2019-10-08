@@ -1,5 +1,6 @@
 import React from "react";
-import gql from "graph-tag";
+import gql from "graphql-tag";
+
 import { graphql } from "react-apollo";
 import "./index.css";
 
@@ -17,6 +18,11 @@ const POST_QUERY = gql`
   }
 `;
 
+const PostList = ({ loading, posts, refetch }) => {
+  if (loading) return <p>Loading...</p>;
+  return posts.map(post => console.log(post));
+};
+
 export default graphql(POST_QUERY, {
   props(result) {
     const { data } = result;
@@ -29,4 +35,4 @@ export default graphql(POST_QUERY, {
       refetch
     };
   }
-})(PostsList);
+})(PostList);
